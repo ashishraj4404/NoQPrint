@@ -85,8 +85,8 @@ const MyCoins = () => {
               <li>• Purchase coins in advance for faster checkout</li>
             </ul>
           </div>
-          <div className="flex justify-between gap-4 mt-2">
-            <input type="number" placeholder="Enter coins to purchase" className="flex-1 bg-black/25 rounded-lg text-center text-lg" 
+          <div className="flex flex-wrap justify-between gap-4 mt-2">
+            <input type="number" placeholder="Enter coins to purchase" className="flex-1 bg-black/25 rounded-lg text-center text-lg p-2" 
             value={coins} onChange={(e) => setCoins(e.target.value)}
             />
             <button

@@ -20,7 +20,7 @@ const Navbar = () => {
     navigate("/");
   };
   return (
-    <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all sticky top-0 z-10">
+    <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all sticky top-0 z-10 overflow-x-hidden">
       <Link to="/">
         <img className="h-13" src={logo} alt="dummyLogo" />
       </Link>
@@ -61,28 +61,26 @@ const Navbar = () => {
         </SignedIn>
       </div>
 
-      <button
-        onClick={() => (open ? setOpen(false) : setOpen(true))}
-        aria-label="Menu"
-        className="sm:hidden"
-      >
-        <div className="flex items-center gap-5">
+
+        {/* Mobile Menu */}
+        <div className="flex items-center gap-5 sm:hidden" >
           <SignedIn>
             <UserButton />
           </SignedIn>
-          {open === false ? (
+          <div onClick={() => (open ? setOpen(false) : setOpen(true))}>
+            {open === false ? (
             <FontAwesomeIcon icon={faBarsStaggered} className="text-xl" />
           ) : (
             <FontAwesomeIcon icon={faXmark} className="text-2xl" />
           )}
+          </div>
+          
         </div>
-      </button>
 
-      {/* Mobile Menu */}
       <div
         className={`${
-          open ? "translate-x-0" : "translate-x-full"
-        } absolute top-[90px] right-0 w-2/3 h-screen bg-gray-100 shadow-xl py-5 flex flex-col items-start gap-5 px-10 text-lg font-semibold md:hidden
+          open ? "translate-x-0" : "translate-x-full "
+        } fixed top-[85px] right-0 w-2/3 h-screen bg-gray-100 shadow-xl py-5 flex flex-col items-start gap-5 px-10 text-lg font-semibold md:hidden
             transition-transform duration-300 ease-in-out transform`}
       >
         <div

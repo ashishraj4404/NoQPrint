@@ -56,8 +56,8 @@ exports.createOrderCheckoutSession = async (req, res) => {
         quantity: 1,
       }],
       mode: "payment",
-      success_url: `http://localhost:5173/orderconfirm?orderId=${orderId}`,
-      cancel_url: "http://localhost:5173/cancel",
+      success_url: `https://noqprint.vercel.app/orderconfirm?orderId=${orderId}`,
+      cancel_url: "https://noqprint.vercel.app/upload",
       payment_intent_data: {
         metadata: { orderId, amount: amount.toString() },
       },
@@ -87,8 +87,8 @@ exports.createCoinsCheckoutSession = async (req, res) => {
         quantity: 1,
       }],
       mode: "payment",
-      success_url: `http://localhost:5173/my-coins?success=${amount}`,
-      cancel_url: "http://localhost:5173/cancel",
+      success_url: `https://noqprint.vercel.app/my-coins?success=${amount}`,
+      cancel_url: "https://noqprint.vercel.app/my-coins",
       payment_intent_data: {
         metadata: { userId, amount: amount.toString() },
       },
