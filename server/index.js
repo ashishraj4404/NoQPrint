@@ -18,7 +18,7 @@ const app = express();
 app.use(cors());
 app.use(ClerkExpressWithAuth({ secretKey: process.env.CLERK_SECRET_KEY }));
 
-const port=process.env.PORT;
+const port=process.env.PORT || 8000;
 const mongo_url = process.env.MONGO_URL;
 mongoose.connect(mongo_url)
 .then(() => {
