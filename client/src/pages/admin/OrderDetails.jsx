@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import toast from "react-hot-toast";
 import {useAuth} from "@clerk/clerk-react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const OrderDetails = ({
   selectedOrder,
@@ -46,7 +47,7 @@ const OrderDetails = ({
     try {
       // ⬇️ Call your backend API to update the status
       await axios.put(
-        `http://localhost:8000/api/orders/${orderId}`,
+        `${API_URL}/api/orders/${orderId}`,
         {
           status: newStatus,
         },

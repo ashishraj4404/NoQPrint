@@ -11,6 +11,7 @@ import { PDFDocument } from "pdf-lib";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
 import PulseLoader from "react-spinners/PulseLoader";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Upload = () => {
   const [prices, setPrices] = useState(null);
@@ -20,7 +21,7 @@ const Upload = () => {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/pricing");
+        const res = await axios.get(`${API_URL}/api/pricing`);
         const data = res.data[0];
 
         const formattedPrices = {
@@ -109,7 +110,7 @@ const Upload = () => {
     e.preventDefault();
     const token = await getToken();
     if (printSettings.paymentMethod === "Coins") {
-      const res = await axios.get("http://localhost:8000/api/user/coins", {
+      const res = await axios.get(`${API_URL}/api/user/coins`, {
         params: { userId: user.id },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -134,7 +135,7 @@ const Upload = () => {
     }
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/upload",
+        `${API_URL}/api/upload`,
         formData
       );
       const uploadedFiles = res.data;
@@ -175,7 +176,7 @@ const Upload = () => {
       };
       try {
         const response = await axios.post(
-          "http://localhost:8000/api/orders",
+          `${API_URL}/api/orders`,
           { orderData, userId },
           {
             headers: {
@@ -186,7 +187,7 @@ const Upload = () => {
 
         if (printSettings.paymentMethod === "Coins") {
           await axios.post(
-            "http://localhost:8000/api/user/update-coins",
+            `${API_URL}/api/user/update-coins`,
             {
               userId,
               amount: -parseFloat(calculateTotal()),
@@ -208,7 +209,7 @@ const Upload = () => {
         }
 
         const res = await axios.post(
-          "http://localhost:8000/api/create-checkout-session/order",
+          `${API_URL}/api/create-checkout-session/order`,
           {
             orderId: response.data._id,
             amount: parseFloat(calculateTotal()),

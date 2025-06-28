@@ -3,6 +3,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import toast from "react-hot-toast";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const OrderDetails = ({ selectedOrder, setSelectedOrder, setRefresh }) => {
   const { user } = useUser();
@@ -20,7 +21,7 @@ const OrderDetails = ({ selectedOrder, setSelectedOrder, setRefresh }) => {
     const token = await getToken();
     axios
       .put(
-        `http://localhost:8000/api/orders/${selectedOrder._id}`,
+        `${API_URL}/api/orders/${selectedOrder._id}`,
         {
           status: "Cancelled",
         },
@@ -36,7 +37,7 @@ const OrderDetails = ({ selectedOrder, setSelectedOrder, setRefresh }) => {
           selectedOrder.paymentMode === "Coins"
         ) {
           await axios.post(
-            "http://localhost:8000/api/user/update-coins",
+            `${API_URL}/api/user/update-coins`,
             {
               userId: user.id,
               amount: selectedOrder.totalPrice,

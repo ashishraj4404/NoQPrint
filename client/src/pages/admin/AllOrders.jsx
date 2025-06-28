@@ -3,6 +3,7 @@ import OrderDetails from "./OrderDetails";
 import axios from "axios";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useAuth } from "@clerk/clerk-react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -16,7 +17,7 @@ const AllOrders = () => {
     try {
       const fetchOrderData = async () => {
         const token = await getToken();
-        const res = await axios.get("http://localhost:8000/api/orders/all", {
+        const res = await axios.get(`${API_URL}/api/orders/all`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -15,6 +15,7 @@ import OrderDetails from "./OrderDetails";
 import EditOrder from "./EditOrder";
 import { useUser, useAuth } from "@clerk/clerk-react";
 import PulseLoader from "react-spinners/PulseLoader";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const MyOrders = () => {
   const { user } = useUser();
@@ -26,7 +27,7 @@ const MyOrders = () => {
     try {
       const fetchOrderData = async () => {
         const token = await getToken();
-        const res = await axios.get("http://localhost:8000/api/orders", {
+        const res = await axios.get(`${API_URL}/api/orders`, {
           params: { userId: user.id },
           headers: {
           Authorization: `Bearer ${token}`,

@@ -9,6 +9,7 @@ import {
 import { Link, useSearchParams } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const OrderConfirmation = () => {
   const [params] = useSearchParams();
@@ -29,7 +30,7 @@ const OrderConfirmation = () => {
     const checkOrderStatus = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/orders/${storedOrderId}`
+          `${API_URL}/api/orders/${storedOrderId}`
         );
         const order = res.data;
 

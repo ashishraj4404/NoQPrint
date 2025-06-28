@@ -10,6 +10,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useAuth } from "@clerk/clerk-react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const PriceSetting = () => {
   const [rates, setRates] = useState({});
@@ -20,7 +21,7 @@ const PriceSetting = () => {
     const fetchPriceRates = async () => {
      
       try {
-        const res = await axios.get("http://localhost:8000/api/pricing");
+        const res = await axios.get(`${API_URL}/api/pricing`);
         console.log(res.data);
         setRates(res.data[0]);
       } catch (err) {
@@ -46,7 +47,7 @@ const PriceSetting = () => {
     setLoading(true);
       const token = await getToken();
     try {
-      await axios.put("http://localhost:8000/api/pricing", rates, {
+      await axios.put(`${API_URL}/api/pricing`, rates, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -6,6 +6,7 @@ import axios from "axios";
 import PulseLoader from "react-spinners/PulseLoader";
 import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const MyCoins = () => {
   const [balance, setBalance] = useState(0);
@@ -19,7 +20,7 @@ const MyCoins = () => {
     try {
       const token = await getToken();
 
-      const res = await axios.get("http://localhost:8000/api/user/coins", {
+      const res = await axios.get(`${API_URL}/api/user/coins`, {
         params: { userId: user.id },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,7 +48,7 @@ const MyCoins = () => {
       toast.error("Minimum 50 coins needs to be purchased!");
       return;
     }
-    const res = await axios.post("http://localhost:8000/api/create-checkout-session/coins", {amount : coins, userId : user.id});
+    const res = await axios.post(`${API_URL}/api/create-checkout-session/coins`, {amount : coins, userId : user.id});
     window.location.href = res.data.url;
 
   }

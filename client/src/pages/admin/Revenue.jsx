@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import PulseLoader from "react-spinners/PulseLoader";
 import {useAuth} from "@clerk/clerk-react"
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Revenue = () => {
   const [revenueData, setRevenueData] = useState({
@@ -28,7 +29,7 @@ const Revenue = () => {
     const fetchRevenueData = async () => {
       const token = await getToken();
       try {
-        const res = await axios.get("http://localhost:8000/api/revenue", {headers: {
+        const res = await axios.get(`${API_URL}/api/revenue`, {headers: {
           Authorization: `Bearer ${token}`,
         }}); // Change URL if hosted
         const { today, thisWeek, thisMonth, total, last10Days } = res.data;

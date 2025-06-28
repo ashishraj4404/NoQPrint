@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PulseLoader from "react-spinners/PulseLoader";
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 const AdminProtectedRoute = ({ children }) => {
   const { user, isSignedIn, isLoaded } = useUser();
@@ -15,7 +17,7 @@ const AdminProtectedRoute = ({ children }) => {
       if (isLoaded && isSignedIn) {
         try {
           const token = await getToken();
-          const res = await axios.get("http://localhost:8000/api/user/role", {
+          const res = await axios.get(`${API_URL}/api/user/role`, {
             params: { email: user.primaryEmailAddress.emailAddress },
             headers: {
               Authorization: `Bearer ${token}`,

@@ -2,6 +2,7 @@ import { useSignIn } from "@clerk/clerk-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AdminLogin = () => {
   const { signIn, setActive } = useSignIn();
@@ -19,7 +20,7 @@ const AdminLogin = () => {
 
     try {
       const roleRes = await axios.get(
-        `http://localhost:8000/api/user/role?email=${email}`
+        `${API_URL}/api/user/role?email=${email}`
       );
       const userRole = roleRes.data.role;
       if (userRole !== "admin") {
