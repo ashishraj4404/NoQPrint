@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSignUp } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const StudentSignup = ({ setIsLogin }) => {
   const { signUp, setActive } = useSignUp();
@@ -55,7 +56,7 @@ const StudentSignup = ({ setIsLogin }) => {
         role: "user",
       };
       await axios
-        .post("http://localhost:8000/api/user", newUser)
+        .post(`${API_URL}/api/user`, newUser)
         .then(() => navigate("/"))
         .catch((err) => console.log(err));
     } catch (err) {
